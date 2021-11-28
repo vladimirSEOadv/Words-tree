@@ -11,6 +11,6 @@
 	width: 100%;
 }
 
-/* textarea {
-	width: 100%;
-} */
+.controls-textarea {
+	margin-top: 15px;
+}

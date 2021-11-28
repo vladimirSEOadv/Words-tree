@@ -2,10 +2,11 @@ let userInput = document.querySelector('#main-keyword');
 let buttonCreateTree = document.querySelector('#create-tree');
 let keysInUserInput = document.querySelector('#words');
 let buttonDownloadWords = document.querySelector('#download-words');
+let wordsCounter = document.querySelector('.word-counter')
 let keysForWordsTree = [["Ключевые слова"]];
 
 buttonDownloadWords.addEventListener('click', createArrOfWords); //Получение семантики
-buttonCreateTree.addEventListener('click', getUserMainKey); // Получение базового слова
+userInput.addEventListener('change', getUserMainKey); // Получение базового слова
 
 google.load("visualization", "1.1",
 	{ packages: ["wordtree"] });
@@ -33,8 +34,10 @@ function drawChart(options) { // Отрисовка диаграммы
 
 function createArrOfWords() { // Формирование массива ключевых слов
 	keysForWordsTree = [];
-	let arrOfKeysInUserInput = keysInUserInput.value.split("\n");
+	let arrOfKeysInUserInput = Array.from(new Set(keysInUserInput.value.split("\n")));
+
 	for (i = 0; i < arrOfKeysInUserInput.length; i++) {
 		keysForWordsTree.push([arrOfKeysInUserInput[i]]);
 	};
+	wordsCounter.textContent = `Фраз в массиве ${arrOfKeysInUserInput.length}`
 };
